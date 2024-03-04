@@ -1,0 +1,25 @@
+All statistics are based on contigs of size >= 500 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                    GCF_000001215.4_Release_6_plus_ISO1_MT_genomic
+# contigs (>= 0 bp)         1870                                          
+# contigs (>= 1000 bp)      1868                                          
+# contigs (>= 5000 bp)      173                                           
+# contigs (>= 10000 bp)     120                                           
+# contigs (>= 25000 bp)     43                                            
+# contigs (>= 50000 bp)     18                                            
+Total length (>= 0 bp)      143726002                                     
+Total length (>= 1000 bp)   143724894                                     
+Total length (>= 5000 bp)   140612766                                     
+Total length (>= 10000 bp)  140283895                                     
+Total length (>= 25000 bp)  139196077                                     
+Total length (>= 50000 bp)  138340798                                     
+# contigs                   1870                                          
+Largest contig              32079331                                      
+Total length                143726002                                     
+GC (%)                      42.01                                         
+N50                         25286936                                      
+N90                         23513712                                      
+auN                         24916941.3                                    
+L50                         3                                             
+L90                         5                                             
+# N's per 100 kbp           802.21                                        
