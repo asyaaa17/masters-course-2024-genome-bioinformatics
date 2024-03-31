@@ -64,10 +64,11 @@ The AUGUSTUS tool was used for gene prediction in the *Drosophila melanogaster* 
      ```
 - **Total predicted genes (AUGUSTUS):** 6310
   
-After running GeneMark-ES, the number of predicted genes will be detailed in the output file `genemark.gtf`. 
-    ```bash
-    grep -c 'gene' genemark.gtf
-    ```   
+After running GeneMark-ES, the number of predicted genes will be detailed in `genemark.gtf` in the output file. 
+
+    ```
+     grep -c 'gene' genemark.gtf
+     ```
 - **Total predicted genes (GeneMark-ES):** 185915
 
 The significant difference in gene counts between genemark.gtf and augustus_output.gff3 could be attributed to the inherent differences in prediction methodologies, parameters used, and sensitivity of the GeneMark and AUGUSTUS gene prediction tools. GeneMark might predict a larger number of genes due to its modeling approach or settings, which could result in a higher sensitivity to potential gene sequences. Conversely, AUGUSTUS, depending on its configuration and training, might provide a more conservative estimate, focusing on genes with higher confidence levels. These variations highlight the importance of understanding the characteristics and underlying algorithms of each tool for genomic annotation.
