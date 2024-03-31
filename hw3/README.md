@@ -65,7 +65,7 @@ The AUGUSTUS tool was used for gene prediction in the *Drosophila melanogaster* 
 - **Total predicted genes (AUGUSTUS):** 6310
   
 After running GeneMark-ES, the number of predicted genes will be detailed in the output file `genemark.gtf`. 
-    ```
+    ```bash
     grep -c 'gene' genemark.gtf
     ```   
 - **Total predicted genes (GeneMark-ES):** 185915
