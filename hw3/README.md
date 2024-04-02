@@ -14,11 +14,11 @@
     conda install -c bioconda augustus -y
     augustus --species=help
     ```
-I used AUGUSTUS to predict genes in the Drosophila melanogaster genome masked. Given the significant size of the genome and computational constraints, I performed the analysis using the fly species model.
+I used AUGUSTUS to predict genes in the Saccharomyces cerevisiae S288C genome masked (RepeatMasker). Given the significant size of the genome and computational constraints, I performed the analysis using the *Saccharomyces_cerevisiae_S288C* species model.
 
 3. **Running AUGUSTUS for masked genome:**  
     ```bash
-    time augustus --species=fly  GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.masked.fna > augustus_output.gff3
+    time augustus --species=saccharomyces_cerevisiae_S288C GCA_000146045.2_R64_genomic.masked.fna > GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
     ```
 The execution was running approximately 246 minutes.
 
@@ -53,15 +53,15 @@ The execution was running approximately 246 minutes.
 
 6. **Runing GeneMark for masked genome**:
      ```bash
-     perl ~/hw3/gmes_linux_64_4/gmes_petap.pl --sequence GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.masked.fna --ES --cores 8
+     perl ~/hw3/gmes_linux_64_4/gmes_petap.pl --sequence GCA_000146045.2_R64_genomic.masked.fna --ES --cores 8
      ```
 This procedure takes ~150 minutes.
 #### Deliverables
 
 - **Summary of Predicted Gene Numbers**:
-The AUGUSTUS tool was used for gene prediction in the *Drosophila melanogaster* genome using the `fly` species model. The process resulted in a file named `augustus_output.gff3`, which contains the predicted gene structures.
+The AUGUSTUS tool was used for gene prediction in the *saccharomyces_cerevisiae_S288C*. The process resulted in a file named `augustus_output.gff3`, which contains the predicted gene structures.
     ```bash
-     grep -c -P "\tgene\t"  GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.masked.augustus_output.gff3
+     grep -c -P "\tgene\t"  GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
      ```
 - **Total predicted genes (AUGUSTUS):** 6310
   
@@ -72,7 +72,7 @@ After running GeneMark-ES, the number of predicted genes will be detailed in `ge
      ```
 - **Total predicted genes (GeneMark-ES):** 185915
 
-The significant difference in gene counts between genemark.gtf and  GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.masked.augustus_output.gff3 could be attributed to the inherent differences in prediction methodologies, parameters used, and sensitivity of the GeneMark and AUGUSTUS gene prediction tools. GeneMark might predict a larger number of genes due to its modeling approach or settings, which could result in a higher sensitivity to potential gene sequences. Conversely, AUGUSTUS, depending on its configuration and training, might provide a more conservative estimate, focusing on genes with higher confidence levels. These variations highlight the importance of understanding the characteristics and underlying algorithms of each tool for genomic annotation.
+The significant difference in gene counts between genemark.gtf and GCA_000146045.2_R64_genomic.masked.augustus_output.gff3 could be attributed to the inherent differences in prediction methodologies, parameters used, and sensitivity of the GeneMark and AUGUSTUS gene prediction tools. GeneMark might predict a larger number of genes due to its modeling approach or settings, which could result in a higher sensitivity to potential gene sequences. Conversely, AUGUSTUS, depending on its configuration and training, might provide a more conservative estimate, focusing on genes with higher confidence levels. These variations highlight the importance of understanding the characteristics and underlying algorithms of each tool for genomic annotation.
 
 ## TASK 2
 ### Homology-Based Annotation
@@ -83,15 +83,15 @@ The significant difference in gene counts between genemark.gtf and  GCF_00000121
     conda install -c bioconda exonerate
     ```
 
-2. **Download and unzip from NCBI for Drosophila melanogaster Ref-seq:**  
+2. **Download and unzip protein sequence from NCBI Ref-seq:**  
    ```bash
-    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/215/GCF_000001215.4_Release_6_plus_ISO1_MT/GCF_000001215.4_Release_6_plus_ISO1_MT_protein.faa.gz
-    gzip -d GCF_000001215.4_Release_6_plus_ISO1_MT_protein.faa.gz
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/146/045/GCA_000146045.2_R64/GCA_000146045.2_R64_protein.faa.gz
+    gzip -d GCA_000146045.2_R64_protein.faa.gz  
     ```
 
 3. **Run Exonerate for masked genome:**  
     ```bash
-    exonerate --model protein2genome --showtargetgff true GCF_000001215.4_Release_6_plus_ISO1_MT_protein.faa GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna > exonerate_output.gff3
+    exonerate --model protein2genome --showtargetgff true GCA_000146045.2_R64_protein.faa GCA_000146045.2_R64_genomic.masked.fna > exonerate_output.gff3
     ```
 ### MMSeqs2 with Proteins: Installation and Running Instructions
 
@@ -102,8 +102,8 @@ The significant difference in gene counts between genemark.gtf and  GCF_00000121
 
 2. **Create a database for the protein sequences and the masked genome:**  
    ```bash
-    mmseqs createdb GCF_000001215.4_Release_6_plus_ISO1_MT_protein.faa proteinsDB
-    mmseqs createdb GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.masked.fna genomeDB
+    mmseqs createdb GCA_000146045.2_R64_protein.faa proteinsDB
+    mmseqs createdb GCA_000146045.2_R64_genomic.masked.fna genomeDB
     ```
 
 3. **Run the search:**  
