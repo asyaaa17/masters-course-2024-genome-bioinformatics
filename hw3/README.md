@@ -18,7 +18,7 @@ I used AUGUSTUS to predict genes in the Saccharomyces cerevisiae S288C genome ma
 
 3. **Running AUGUSTUS for masked genome:**  
     ```bash
-    time augustus --species=saccharomyces_cerevisiae_S288C GCA_000146045.2_R64_genomic.masked.fna > GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
+    time augustus --species=saccharomyces_cerevisiae_S288C GCA_000146045.2_R64_genomic.fna.masked > GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
     ```
 The execution was running approximately 246 minutes.
 
@@ -53,7 +53,7 @@ The execution was running approximately 246 minutes.
 
 6. **Runing GeneMark for masked genome**:
      ```bash
-     perl ~/hw3/gmes_linux_64_4/gmes_petap.pl --sequence GCA_000146045.2_R64_genomic.masked.fna --ES --cores 8
+     perl ~/hw3/gmes_linux_64_4/gmes_petap.pl --sequence GCA_000146045.2_R64_genomic.fna.masked --ES --cores 8
      ```
 This procedure takes ~150 minutes.
 #### Deliverables
@@ -91,7 +91,7 @@ The significant difference in gene counts between genemark.gtf and GCA_000146045
 
 3. **Run Exonerate for masked genome:**  
     ```bash
-    exonerate --model protein2genome --showtargetgff true GCA_000146045.2_R64_protein.faa GCA_000146045.2_R64_genomic.masked.fna > exonerate_output.gff3
+    exonerate --model protein2genome --showtargetgff true GCA_000146045.2_R64_protein.faa GCA_000146045.2_R64_genomic.fna.masked > exonerate_output.gff3
     ```
 ### MMSeqs2 with Proteins: Installation and Running Instructions
 
@@ -103,7 +103,7 @@ The significant difference in gene counts between genemark.gtf and GCA_000146045
 2. **Create a database for the protein sequences and the masked genome:**  
    ```bash
     mmseqs createdb GCA_000146045.2_R64_protein.faa proteinsDB
-    mmseqs createdb GCA_000146045.2_R64_genomic.masked.fna genomeDB
+    mmseqs createdb GCA_000146045.2_R64_genomic.fna.masked genomeDB
     ```
 
 3. **Run the search:**  
