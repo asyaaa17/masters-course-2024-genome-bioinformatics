@@ -170,7 +170,7 @@ Using protein homology for genome annotation is a crucial step towards understan
    
 8. **Generate Mapping Statistics:**
    ```bash
-    samtools flagstat mapped_reads.bam
+    samtools flagstat mapped_reads.sorted.bam
     ```
 
    ### Mapping Statistics
@@ -201,7 +201,7 @@ Using protein homology for genome annotation is a crucial step towards understan
 
 10. **Generate BAM Statistics with BamTools:**
     ```bash
-    bamtools stats -in mapped_reads.bam
+    bamtools stats -in mapped_reads.sorted.bam
     ```
 
     ### BAM Statistics
