@@ -1,0 +1,30 @@
+# gffcompare v0.12.6 | Command line was:
+#gffcompare -r GCA_000146045.2_R64_genomic.gff -G -o comparison_result GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
+#
+
+#= Summary for dataset: GCA_000146045.2_R64_genomic.masked.augustus_output.gff3 
+#     Query mRNAs :    5327 in    5327 loci  (338 multi-exon transcripts)
+#            (0 multi-transcript loci, ~1.0 transcripts per locus)
+# Reference mRNAs :    6423 in    6329 loci  (331 multi-exon)
+# Super-loci w/ reference transcripts:     5310
+#-----------------| Sensitivity | Precision  |
+        Base level:    92.9     |    99.7    |
+        Exon level:    77.4     |    91.8    |
+      Intron level:    52.8     |    47.5    |
+Intron chain level:    51.1     |    50.0    |
+  Transcript level:    79.3     |    95.6    |
+       Locus level:    80.5     |    95.6    |
+
+     Matching intron chains:     169
+       Matching transcripts:    5093
+              Matching loci:    5092
+
+          Missed exons:    1157/6764	( 17.1%)
+           Novel exons:      72/5706	(  1.3%)
+        Missed introns:     111/341	( 32.6%)
+         Novel introns:     149/379	( 39.3%)
+           Missed loci:     951/6329	( 15.0%)
+            Novel loci:       8/5327	(  0.2%)
+
+ Total union super-loci across all input datasets: 5318 
+5327 out of 5327 consensus transcripts written in comparison_result.annotated.gtf (0 discarded as redundant)
