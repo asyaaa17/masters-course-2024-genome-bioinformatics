@@ -20,7 +20,7 @@ I used AUGUSTUS to predict genes in the Saccharomyces cerevisiae S288C genome ma
     ```bash
     time augustus --species=saccharomyces_cerevisiae_S288C GCA_000146045.2_R64_genomic.fna.masked > GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
     ```
-The execution was running approximately 246 minutes.
+The execution was running approximately 9 minutes. GCA_000146045.2_R64_genomic.masked.augustus_output.exonerate_output.gff3 is 6.2M.
 
 ### GeneMark-ES Installation and Running Instructions
 
@@ -55,24 +55,19 @@ The execution was running approximately 246 minutes.
      ```bash
      perl ~/hw3/gmes_linux_64_4/gmes_petap.pl --sequence GCA_000146045.2_R64_genomic.fna.masked --ES --cores 8
      ```
-This procedure takes ~150 minutes.
+This procedure takes ~8 minutes. genemark.gtf is 4.4M.
 #### Deliverables
 
 - **Summary of Predicted Gene Numbers**:
-The AUGUSTUS tool was used for gene prediction in the *saccharomyces_cerevisiae_S288C*. The process resulted in a file named `augustus_output.gff3`, which contains the predicted gene structures.
-    ```bash
-     grep -c -P "\tgene\t"  GCA_000146045.2_R64_genomic.masked.augustus_output.gff3
-     ```
-- **Total predicted genes (AUGUSTUS):** 6310
+The AUGUSTUS tool was used for gene prediction in the *saccharomyces_cerevisiae_S288C*. The process resulted in a file named `GCA_000146045.2_R64_genomic.masked.augustus_output.exonerate_output.gff3`, which contains the predicted gene structures.
+
+- **Total predicted genes (AUGUSTUS):** 5706
   
 After running GeneMark-ES, the number of predicted genes will be detailed in `genemark.gtf` in the output file. 
 
-    ```
-     grep -c 'gene' genemark.gtf
-     ```
-- **Total predicted genes (GeneMark-ES):** 185915
+- **Total predicted genes (GeneMark-ES):** 5507
 
-The significant difference in gene counts between genemark.gtf and GCA_000146045.2_R64_genomic.masked.augustus_output.gff3 could be attributed to the inherent differences in prediction methodologies, parameters used, and sensitivity of the GeneMark and AUGUSTUS gene prediction tools. GeneMark might predict a larger number of genes due to its modeling approach or settings, which could result in a higher sensitivity to potential gene sequences. Conversely, AUGUSTUS, depending on its configuration and training, might provide a more conservative estimate, focusing on genes with higher confidence levels. These variations highlight the importance of understanding the characteristics and underlying algorithms of each tool for genomic annotation.
+The significant difference in gene counts between genemark.gtf and GCA_000146045.2_R64_genomic.masked.augustus_output.gff3 could be attributed to the inherent differences in prediction methodologies, parameters used, and sensitivity of the GeneMark and AUGUSTUS gene prediction tools. AUGUSTUS might predict a larger number of genes due to its modeling approach or settings, which could result in a higher sensitivity to potential gene sequences. Conversely, AUGUSTUS, depending on its configuration and training, might provide a more conservative estimate, focusing on genes with higher confidence levels. These variations highlight the importance of understanding the characteristics and underlying algorithms of each tool for genomic annotation.
 
 ## TASK 2
 ### Homology-Based Annotation
@@ -91,8 +86,10 @@ The significant difference in gene counts between genemark.gtf and GCA_000146045
 
 3. **Run Exonerate for masked genome:**  
     ```bash
-    exonerate --model protein2genome --showtargetgff true GCA_000146045.2_R64_protein.faa GCA_000146045.2_R64_genomic.fna.masked > exonerate_output.gff3
+    time exonerate --model protein2genome --showtargetgff true GCA_000146045.2_R64_protein.faa GCA_000146045.2_R64_genomic.fna.masked > exonerate_output.gff3
     ```
+The execution was running 125 minutes. exonerate_output.gff3 is 473M.  
+
 ### MMSeqs2 with Proteins: Installation and Running Instructions
 
 1. **Install MMSeqs2 via Conda:**  
@@ -108,11 +105,13 @@ The significant difference in gene counts between genemark.gtf and GCA_000146045
 
 3. **Run the search:**  
     ```bash
-    time mmseqs search --start-sens 2 -s 7 --sens-steps 3 -a 1 --num-iterations 2 proteinsDB genomeDB resultDB tmp
+    mmseqs search --start-sens 2 -s 7 --sens-steps 3 -a 1 --num-iterations 2 proteinsDB genomeDB alnDB2 tmp
+    mmseqs result2profile proteinsDB genomeDB alnDB2 queryProfileDb
+    mmseqs convertalis proteinsDB genomeDB alnDB2 mmseq_results.tsv --format-output query,target,fident,alnlen,mismatch,gapopen,qstart,qend,qlen,tstart,tend,tlen,evalue,bits,cigar,qheader,theader,qaln,taln --search-type 2
     ```
- The execution was running approximately 124 minutes.  
+ The execution was running 15 minutes.  
 
-Include a discussion on the significance of the protein alignments in gene annotation.*****
+Using protein homology for genome annotation is a crucial step towards understanding the functional aspects of the genome based on known protein sequences. It allows for precise identification of gene regions, especially in genomes with high repeat content or where preliminary gene annotations are absent. Comparing sequences with a database of known proteins can suggest the functional roles of predicted genes, assuming similar functions if a protein from the studied genome aligns with a known protein from another organism. Protein alignments can reveal conserved domains and motifs, aiding in understanding evolutionary relationships and the mechanisms of protein evolution. This approach enhances structural annotation by predicting exon-intron structures, identifying orthologous and paralogous genes to comprehend evolutionary gene and genome histories. It also validates experimental data, such as gene expression and proteomics, confirming the existence and functional activity of predicted genes. Furthermore, in medical research, functional annotation based on protein alignments can identify potential therapeutic targets, highlighting the importance of this method in gene annotation processes.
 
 ## TASK 3
 ### RNA-seq Mapping
