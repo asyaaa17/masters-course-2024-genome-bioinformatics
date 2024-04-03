@@ -68,6 +68,13 @@ After running GeneMark-ES, the number of predicted genes will be detailed in `ge
 - **Total predicted genes (GeneMark-ES):** 5507
 - **Total genes (RefSeq):** 6406
 
+Analysis of predicted CDS (coding DNA sequences) intervals using data from RefSeq annotation (SOTA) and Augustus predictions
+    
+- **Precision**: 0.987031195233088
+- **Recall**: 0.8904347826086957
+
+The results of the analysis confirm the high efficiency and reliability of Augustus-derived annotations compared to RefSeq reference data. The high accuracy indicates that Augustus annotations can be used for further genomic studies. 
+
 The significant difference in gene counts between genemark.gtf and GCA_000146045.2_R64_genomic.masked.augustus_output.gff3 could be attributed to the inherent differences in prediction methodologies, parameters used, and sensitivity of the GeneMark and AUGUSTUS gene prediction tools. AUGUSTUS might predict a larger number of genes due to its modeling approach or settings, which could result in a higher sensitivity to potential gene sequences. Conversely, AUGUSTUS, depending on its configuration and training, might provide a more conservative estimate, focusing on genes with higher confidence levels. These variations highlight the importance of understanding the characteristics and underlying algorithms of each tool for genomic annotation.
 
 
@@ -213,7 +220,7 @@ Moreover, RNA-seq data can uncover transcriptional activity in regions previousl
 
 
     
-### Task 4: Comparing Annotations with RefSeq GFF 
+## Task 4: Comparing Annotations with RefSeq GFF 
 #### Instructions:
 
 1. **Create new environment and install Bedtools:**
